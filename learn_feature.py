@@ -45,10 +45,6 @@ def baseline_model():
 	model.add(Dropout(0.3))
 	model.add(Dense(1400, init='uniform', activation='tanh'))
 	model.add(Dropout(0.3))
-#	model.add(Dense(1300, init='uniform', activation='tanh'))
-#	model.add(Dropout(0.2))
-#	model.add(Dense(1000, init='uniform', activation='tanh'))
-#	model.add(Dropout(0.3))
 	model.add(Dense(3, init='uniform', activation='sigmoid'))
 
 	sgd = SGD(lr=0.0001, decay=1e-6, momentum=0.9, nesterov=True)
@@ -60,12 +56,7 @@ def baseline_model():
 model = baseline_model()
 model.fit(X_train, dummy_y,nb_epoch=150, batch_size=8000, verbose = 1, validation_split=0.20)
 
-#evaluate the model
-#print("%s: %.2f%%" % (model.metrics_names[1], scores[1]*100))
-#estimator = KerasClassifier(build_fn=baseline_model, nb_epoch=20, batch_size=2000, verbose=1)
-#kfold = KFold(n=len(X), n_folds=10, shuffle=True, random_state=seed)
-#encoder = LabelEncoder()
-#encoder.fit(Y_test)
+
 encoded_Y_test = encoder.transform(y_test)
 # convert integers to dummy variables (i.e. one hot encoded)
 dummy_y_test = np_utils.to_categorical(encoded_Y_test)
